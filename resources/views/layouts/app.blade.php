@@ -55,12 +55,28 @@
                         </div>
                     @endguest
                     @auth
-                        <div class="d-flex">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenu2"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Profile
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><a href="{{ route('transaction') }}" class="dropdown-item" type="button">Transaksi</a>
+                                </li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item" type="submit">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        {{-- <div class="d-flex">
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button class="btn btn-outline-primary">Logout</button>
                             </form>
-                        </div>
+                        </div> --}}
                     @endauth
                 </div>
             </nav>

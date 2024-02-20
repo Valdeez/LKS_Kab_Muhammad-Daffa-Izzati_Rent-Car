@@ -32,7 +32,7 @@
                         <td class="align-middle"><img src="{{ asset('storage/' . $c->image) }}" alt="{{ $c->name }}"
                                 width="150px"></td>
                         <td class="align-middle">{{ $c->brand_name }}</td>
-                        <td class="align-middle">{{ $c->price_per_day }}</td>
+                        <td class="align-middle">Rp.{{ $c->price_per_day }}</td>
                         <td class="align-middle">{{ $c->stock }}</td>
                         <td class="align-middle" nowrap>
                             <a href="{{ route('car.edit', $c->id) }}" class="btn btn-sm btn-warning text-white">Edit</a>
@@ -61,6 +61,7 @@
                     <th scope="col" class="align-middle">Tanggal Sewa</th>
                     <th scope="col" class="align-middle">Tanggal Kembali</th>
                     <th scope="col" class="align-middle">Status</th>
+                    <th scope="col" class="align-middle">Status Pembayaran</th>
                     <th scope="col" class="align-middle">Aksi</th>
                 </tr>
             </thead>
@@ -74,8 +75,17 @@
                                 alt="{{ $r->car->name }}" width="150px"></td>
                         <td class="align-middle">{{ \Carbon\Carbon::parse($r->start_date)->format('d F Y') }}</td>
                         <td class="align-middle">{{ \Carbon\Carbon::parse($r->end_date)->format('d F Y') }}</td>
-                        <td class="align-middle text-capitalize">
+                        <td class="align-middle">
                             {{ $r->status == 'pending' ? 'Menunggu konfirmasi' : 'Sedang disewa' }}</td>
+                        <td class="align-middle">
+                            @if ($r->payment_status == 'success')
+                                Pembayaran berhasil
+                            @elseif ($r->payment_status == 'failed')
+                                Pembayaran gagal
+                            @else
+                                Menunggu pembayaran
+                            @endif
+                        </td>
                         @if ($r->status == 'pending')
                             <td class="align-middle" nowrap>
                                 <a href="{{ route('car.reservation', ['id' => $r->id, 'trigger' => 1]) }}"

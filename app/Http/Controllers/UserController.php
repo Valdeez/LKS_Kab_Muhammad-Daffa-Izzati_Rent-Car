@@ -72,6 +72,12 @@ class UserController extends Controller
 
     public function transaction()
     {
-        return view('pages.user.transaction');
+        $user_id = Auth::id();
+
+        $data = [
+            'reservations' => Reservation::where('user_id', $user_id)->get()
+        ];
+
+        return view('pages.user.transaction', compact('data'));
     }
 }
