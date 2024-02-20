@@ -7,12 +7,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="assets/images/car-01.jpg" alt="car" class="img-fluid">
+                    <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" class="img-fluid">
                 </div>
                 <div class="col-lg-6">
-                    <h1 class="display-5 fw-bold mb-2">Toyota Avanza (Toyota)</h1>
-                    <p class="lead">Rp. 300.000/hari</p>
-
+                    <h1 class="display-5 fw-bold mb-2">{{ $data->name }} ({{ $data->brand_name }})</h1>
+                    <p class="lead mb-3">Rp. {{ $data->price_per_day }}/hari</p>
+                    <p class="nav-link active p-0">Stok tersisa {{ $data->stock }}</p>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSewa">
                         Sewa
                     </button>

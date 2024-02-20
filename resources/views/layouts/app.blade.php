@@ -48,10 +48,20 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="d-flex">
-                        <a href="/login" class="btn btn-outline-primary">Masuk</a>
-                        <a href="/register" class="btn btn-primary ms-3">Daftar</a>
-                    </div>
+                    @guest
+                        <div class="d-flex">
+                            <a href="/login" class="btn btn-outline-primary">Masuk</a>
+                            <a href="/register" class="btn btn-primary ms-3">Daftar</a>
+                        </div>
+                    @endguest
+                    @auth
+                        <div class="d-flex">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-outline-primary">Logout</button>
+                            </form>
+                        </div>
+                    @endauth
                 </div>
             </nav>
         </header>

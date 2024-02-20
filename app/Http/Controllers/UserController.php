@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('pages.user.index');
+        $data = Car::all();
+
+        return view('pages.user.index', compact('data'));
     }
 
     public function cars()
     {
-        return view('pages.user.cars');
+        $data = Car::all();
+
+        return view('pages.user.cars', compact('data'));
     }
 
-    public function car()
+    public function car($id)
     {
-        return view('pages.user.car');
+        $data = Car::findOrFail($id);
+
+        return view('pages.user.car', compact('data'));
     }
 
     public function contact()

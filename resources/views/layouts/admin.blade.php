@@ -28,7 +28,10 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="d-flex">
-                        <a href="" class="btn btn-outline-primary">Logout</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-outline-primary">Logout</button>
+                        </form>
                     </div>
                 </div>
             </nav>

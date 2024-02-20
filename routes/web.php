@@ -16,14 +16,14 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function () {
     Route::get('/', [CarController::class, 'index'])->name('car.dashboard');
     Route::resource('car', CarController::class);
 });
 
 Route::get('/', [UserController::class, 'index'])->name('home');
 Route::get('/cars', [UserController::class, 'cars'])->name('cars');
-Route::get('/car', [UserController::class, 'car'])->name('car');
+Route::get('/cars/{id}', [UserController::class, 'car'])->name('car');
 Route::get('/contact', [UserController::class, 'contact'])->name('contact');
 Route::get('/success', [UserController::class, 'success'])->name('success');
 Route::get('/transaction', [UserController::class, 'transaction'])->name('transaction');
