@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -13,7 +14,8 @@ class CarController extends Controller
     public function index()
     {
         $data = [
-            'cars' => Car::all()
+            'cars' => Car::all(),
+            'reservations' => Reservation::where('status', '!=', 'completed')->get(),
         ];
 
         return view('pages.admin.dashboard', compact('data'));
@@ -90,6 +92,39 @@ class CarController extends Controller
         unlink(storage_path('app/public/' . $data->image));
 
         $data->delete();
+
+        return redirect()->route('car.dashboard');
+    }
+
+    public function reservation($id, $trigger)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $car = Car::findOrFail($reservation->car_id);
+
+        if ($trigger == 1) {
+            $reservation->status = 'on_the_road';
+        } else {
+            $reservation->status = 'completed';
+
+            $car->stock = $car->stock + 1;
+
+            $car->save();
+        }
+
+        $reservation->save();
+
+        return redirect()->route('car.dashboard');
+    }
+
+    public function reject($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $car = Car::findOrFail($reservation->car_id);
+
+        $car->stock = $car->stock + 1;
+
+        $reservation->delete();
+        $car->save();
 
         return redirect()->route('car.dashboard');
     }

@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function reservation()
     {
-        $this->hasMany(Reservation::class);
+        return $this->hasMany(Reservation::class);
     }
 }

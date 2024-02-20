@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('proof_of_payment');
             $table->enum('payment_status', ['pending', 'waiting', 'success', 'failed']);
             $table->enum('status', ['pending', 'on_the_road', 'completed']);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('car_id')->references('id')->on('cars');
             $table->timestamps();
         });
     }

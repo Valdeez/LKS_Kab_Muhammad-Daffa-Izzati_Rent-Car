@@ -10,7 +10,7 @@
                     <h1 class="display-6 fw-bold mb-2">Penyewaan Berhasil</h1>
                     <p>Terima kasih telah melakukan penyewaan mobil di Rent Car. Mohon menunggu konfirmasi
                         dari kami.</p>
-                    <a href="index.html" class="btn btn-primary">Kembali ke Beranda</a>
+                    <a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Beranda</a>
                 </div>
             </div>
         </div>
