@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [CarController::class, 'index'])->name('car.dashboard');
+    Route::resource('car', CarController::class);
 });
 
-Auth::routes();
+Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/cars', [UserController::class, 'cars'])->name('cars');
+Route::get('/car', [UserController::class, 'car'])->name('car');
+Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+Route::get('/success', [UserController::class, 'success'])->name('success');
+Route::get('/transaction', [UserController::class, 'transaction'])->name('transaction');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
