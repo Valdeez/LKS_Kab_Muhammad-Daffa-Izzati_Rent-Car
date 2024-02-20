@@ -55,7 +55,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="stock" class="form-label">Stok Mobil</label>
-                    <input id="stock" type="text" class="form-control @error('stock') is-invalid @enderror"
+                    <input id="stock" type="number" class="form-control @error('stock') is-invalid @enderror"
                         name="stock" required>
 
                     @error('stock')

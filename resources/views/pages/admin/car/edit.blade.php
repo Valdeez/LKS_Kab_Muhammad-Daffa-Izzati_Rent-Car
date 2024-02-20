@@ -54,7 +54,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="stock" class="form-label">Stok Mobil</label>
-                    <input id="stock" type="text" class="form-control @error('stock') is-invalid @enderror"
+                    <input id="stock" type="number" class="form-control @error('stock') is-invalid @enderror"
                         name="stock" value="{{ $data->stock }}" required>
                     @error('stock')
                         <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                         </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
             </form>
         </div>
     </div>
